@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Roulette</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="./js/roulette.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="roulette-box">
+      <span id="member-name">Hit Enter key</span>
+    </div>
+    <audio id="sound" preload="auto">
+      <source src="./resource/pi.wav" type="audio/wav">
+    </audio>
+    <script>
+     var rt = new Roulette("member-name",
+              ["Bob", "Jhon", "Alice", "Brown"],
+                           "sound");
+     document.addEventListener("keydown", function(e){
+       if(e.keyCode == 13) {
+         rt.start(rt);
+       }
+     }, false);
+    </script>
+  </body>
+</html>
