@@ -15,6 +15,7 @@ Bob
 john
 Alice
 Brown</textarea>
+      <button onclick="action();">Start</button>
     </div>
     <div id="roulette-box">
       <a href="https://github.com/BLThunder1991/html_Roulette">Github</a>
@@ -28,13 +29,17 @@ Brown</textarea>
      var rt = new Roulette("member-name",
                            document.getElementById("members").value.split("\n"),
                            "sound");
-     document.addEventListener("keydown", function(e){
+     var action = function(e){
+       var members = document.getElementById("members").value;
+       rt.updateMember(members.split("\n"));
+       rt.start();
+     };
+     document.addEventListener("keydown", function(e) {
        if(e.keyCode == 13 && e.target.nodeName != "TEXTAREA") {
-         var members = document.getElementById("members").value;
-         rt.updateMember(members.split("\n"));
-         rt.start();
+	 action();
        }
      }, false);
+
     </script>
   </body>
 </html>
