@@ -8,6 +8,14 @@
     <script src="./js/roulette.js" type="text/javascript"></script>
   </head>
   <body>
+    <div id="name-box">
+      <label>Member</label>
+      <textarea id="members">
+Bob
+john
+Alice
+Brown</textarea>
+    </div>
     <div id="roulette-box">
       <span id="member-name">Hit Enter key</span>
     </div>
@@ -15,11 +23,12 @@
       <source src="./resource/pi.wav" type="audio/wav">
     </audio>
     <script>
-     var rt = new Roulette("member-name",
-              ["Bob", "Jhon", "Alice", "Brown"],
-                           "sound");
      document.addEventListener("keydown", function(e){
-       if(e.keyCode == 13) {
+       if(e.keyCode == 13 && e.target.nodeName != "TEXTAREA") {
+         var members = document.getElementById("members").value;
+         var rt = new Roulette("member-name",
+                               members.split("\n"),
+                               "sound");
          rt.start(rt);
        }
      }, false);
