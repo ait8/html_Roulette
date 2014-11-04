@@ -25,12 +25,13 @@ Brown</textarea>
       <source src="./resource/pi.wav" type="audio/wav">
     </audio>
     <script>
+     var rt = new Roulette("member-name",
+                           document.getElementById("members").value.split("\n"),
+                           "sound");
      document.addEventListener("keydown", function(e){
        if(e.keyCode == 13 && e.target.nodeName != "TEXTAREA") {
          var members = document.getElementById("members").value;
-         var rt = new Roulette("member-name",
-                               members.split("\n"),
-                               "sound");
+         rt.updateMember(members.split("\n"));
          rt.start();
        }
      }, false);

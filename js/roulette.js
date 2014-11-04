@@ -46,6 +46,7 @@ Roulette.prototype.getRandomMember = function() {
 };
 
 Roulette.prototype.start = function() {
+  if(this.now) return;
   if(this.member == undefined ||
      this.member.length == 0) {
     alert("No Member!");
@@ -65,4 +66,9 @@ Roulette.prototype.start = function() {
   setTimeout(function(){
     that.loop();
   }, 100);
+};
+
+Roulette.prototype.updateMember = function(array) {
+  if(this.now) return;
+  this.member = array;
 };
