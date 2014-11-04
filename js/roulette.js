@@ -16,26 +16,28 @@ function Roulette(id, members, sound_id) {
 
 };
 
-Roulette.prototype.loop = function(that, time, num){
-  if (that.now == false) {
-    that.reslut_tag.innerHTML = that.lukky_guy;
-    that.lukky_guy = -1;
+Roulette.prototype.loop = function(time, num){
+  if (this.now == false) {
+    this.reslut_tag.innerHTML = this.lukky_guy;
+    this.lukky_guy = -1;
     return;
   }
 
   if (num == undefined) num = -1;
-  num = (num + 1) % that.member.length;
-  that.reslut_tag.innerHTML = that.member[num];
+  num = (num + 1) % this.member.length;
+  this.reslut_tag.innerHTML = this.member[num];
 
-  if (that.sound != undefined) {
-    that.sound.currentTime = 0;
-    that.sound.play();
+  if (this.sound != undefined) {
+    this.sound.currentTime = 0;
+    this.sound.play();
   }
 
   if (time == undefined) time = 50;
   time += 5;
+
+  that = this;
   setTimeout(function(){
-    that.loop(that, time, num);
+    that.loop(time, num);
   }, time);
 };
 
@@ -43,23 +45,24 @@ Roulette.prototype.getRandomMember = function() {
   return this.member[Math.floor(Math.random() * this.member.length)];
 };
 
-Roulette.prototype.start = function(that) {
-  if(that.member == undefined ||
-     that.member.length == 0) {
+Roulette.prototype.start = function() {
+  if(this.member == undefined ||
+     this.member.length == 0) {
     alert("No Member!");
     return;
   }
 
-  if (that.now) return;
+  if (this.now) return;
 
-  that.now = true;
-  that.lukky_guy = that.getRandomMember();
+  this.now = true;
+  this.lukky_guy = this.getRandomMember();
+  that = this;
 
   setTimeout(function(){
     that.now = false;
   }, 5000);
 
   setTimeout(function(){
-    that.loop(that);
+    that.loop();
   }, 100);
 };
